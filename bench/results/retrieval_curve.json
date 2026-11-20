@@ -1,0 +1,425 @@
+{
+  "queries": 34,
+  "answerable": 33,
+  "labelled_pairs": 205,
+  "package_managers": [
+    "apk",
+    "apt"
+  ],
+  "systems": {
+    "exact_same_machine": {
+      "answered": 6,
+      "correct": 6,
+      "precision_at_1": 1.0,
+      "recall": 0.1818,
+      "f1": 0.3077
+    },
+    "exact_any_machine": {
+      "answered": 22,
+      "correct": 22,
+      "precision_at_1": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8
+    },
+    "vector@0.8": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "vector_unfiltered@0.8": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "vector_top1_no_threshold": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "vector_rerank_top1": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "vector_unfiltered_rerank_top1": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    }
+  },
+  "unfiltered_threshold_sweep": {
+    "0.5": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.525": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.55": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.575": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.6": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.625": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.65": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.675": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.7": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.725": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.75": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.775": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.8": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.825": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.85": {
+      "answered": 34,
+      "correct": 32,
+      "precision_at_1": 0.9412,
+      "recall": 0.9697,
+      "f1": 0.9552
+    },
+    "0.875": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.9": {
+      "answered": 31,
+      "correct": 31,
+      "precision_at_1": 1.0,
+      "recall": 0.9394,
+      "f1": 0.9688
+    },
+    "0.925": {
+      "answered": 25,
+      "correct": 25,
+      "precision_at_1": 1.0,
+      "recall": 0.7576,
+      "f1": 0.8621
+    },
+    "0.95": {
+      "answered": 8,
+      "correct": 8,
+      "precision_at_1": 1.0,
+      "recall": 0.2424,
+      "f1": 0.3902
+    }
+  },
+  "threshold_sweep": {
+    "0.5": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.525": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.55": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.575": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.6": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.625": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.65": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.675": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.7": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.725": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.75": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.775": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.8": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.825": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.85": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.875": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.9": {
+      "answered": 31,
+      "correct": 31,
+      "precision_at_1": 1.0,
+      "recall": 0.9394,
+      "f1": 0.9688
+    },
+    "0.925": {
+      "answered": 25,
+      "correct": 25,
+      "precision_at_1": 1.0,
+      "recall": 0.7576,
+      "f1": 0.8621
+    },
+    "0.95": {
+      "answered": 8,
+      "correct": 8,
+      "precision_at_1": 1.0,
+      "recall": 0.2424,
+      "f1": 0.3902
+    }
+  },
+  "rerank_threshold_sweep": {
+    "0.3": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.35": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.4": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.45": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.5": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.55": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.6": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.65": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.7": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.75": {
+      "answered": 32,
+      "correct": 32,
+      "precision_at_1": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846
+    },
+    "0.8": {
+      "answered": 30,
+      "correct": 30,
+      "precision_at_1": 1.0,
+      "recall": 0.9091,
+      "f1": 0.9524
+    },
+    "0.85": {
+      "answered": 28,
+      "correct": 28,
+      "precision_at_1": 1.0,
+      "recall": 0.8485,
+      "f1": 0.918
+    },
+    "0.9": {
+      "answered": 23,
+      "correct": 23,
+      "precision_at_1": 1.0,
+      "recall": 0.697,
+      "f1": 0.8214
+    }
+  },
+  "judge_model": "claude-sonnet-5-5",
+  "judge_calls": 35
+}

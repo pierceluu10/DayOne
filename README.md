@@ -55,6 +55,19 @@ When the same fix has helped two or more hires, the agent opens an issue on `acm
 
 Collections: `hires` (lease, container, run), `steps` (unique on hire and step), `events` (ordered by timestamp and sequence; the page streams these over SSE) and `experiences` (vector index on `embedding`, created in code).
 
+## Benchmarks (18 open-source repos × 3 operating systems)
+
+The same engine, given only each project's own documented setup, onboarded 18 real open-source repositories across Python, Ruby, Go, Node and Rust on bare Ubuntu, Debian and Alpine containers. A hire counts only if the project's test suite goes green with no human help. Method and full results are in [bench/README.md](bench/README.md).
+
+| | Memory off | Memory on |
+|---|---|---|
+| Onboarded (54 repo × OS pairs) | 90.7% | **94.4%** |
+| LLM calls | 220 | **18 (−92%)** |
+| LLM cost | $2.62 | **$0.36 (−86%)** |
+
+- **Learning curve**: over 24 hires in a row, mean LLM cost per hire fell 59% between the first 8 and the last 8, and wall-clock time fell 64%. All 24 were onboarded.
+- **Retrieval quality**: across about 115 real failures and 715 judged (error, fix) pairs, step-filtered Atlas Vector Search at the 0.8 threshold returned a correct fix first 97–100% of the time, with 97% recall. Exact fingerprint matching reached 64–67% recall.
+
 ## Benchmarks (4 sequential hires)
 
 Four hires run one after another on a freshly reset Gitea, `acme-api` at c9d8d7f, between 15:08 and 15:29. Measured with `uv run python tests/acceptance/measure.py`, which reads only Atlas.

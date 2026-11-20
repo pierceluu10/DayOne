@@ -1,0 +1,425 @@
+{
+  "queries": 81,
+  "answerable": 73,
+  "labelled_pairs": 510,
+  "package_managers": [
+    "apk",
+    "apt"
+  ],
+  "systems": {
+    "exact_same_machine": {
+      "answered": 17,
+      "correct": 17,
+      "precision_at_1": 1.0,
+      "recall": 0.2329,
+      "f1": 0.3778
+    },
+    "exact_any_machine": {
+      "answered": 47,
+      "correct": 47,
+      "precision_at_1": 1.0,
+      "recall": 0.6438,
+      "f1": 0.7833
+    },
+    "vector@0.8": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "vector_unfiltered@0.8": {
+      "answered": 80,
+      "correct": 71,
+      "precision_at_1": 0.8875,
+      "recall": 0.9726,
+      "f1": 0.9281
+    },
+    "vector_top1_no_threshold": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "vector_rerank_top1": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "vector_unfiltered_rerank_top1": {
+      "answered": 81,
+      "correct": 72,
+      "precision_at_1": 0.8889,
+      "recall": 0.9863,
+      "f1": 0.9351
+    }
+  },
+  "unfiltered_threshold_sweep": {
+    "0.5": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.525": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.55": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.575": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.6": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.625": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.65": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.675": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.7": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.725": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.75": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.775": {
+      "answered": 81,
+      "correct": 71,
+      "precision_at_1": 0.8765,
+      "recall": 0.9726,
+      "f1": 0.9221
+    },
+    "0.8": {
+      "answered": 80,
+      "correct": 71,
+      "precision_at_1": 0.8875,
+      "recall": 0.9726,
+      "f1": 0.9281
+    },
+    "0.825": {
+      "answered": 80,
+      "correct": 71,
+      "precision_at_1": 0.8875,
+      "recall": 0.9726,
+      "f1": 0.9281
+    },
+    "0.85": {
+      "answered": 78,
+      "correct": 71,
+      "precision_at_1": 0.9103,
+      "recall": 0.9726,
+      "f1": 0.9404
+    },
+    "0.875": {
+      "answered": 75,
+      "correct": 70,
+      "precision_at_1": 0.9333,
+      "recall": 0.9589,
+      "f1": 0.9459
+    },
+    "0.9": {
+      "answered": 72,
+      "correct": 69,
+      "precision_at_1": 0.9583,
+      "recall": 0.9452,
+      "f1": 0.9517
+    },
+    "0.925": {
+      "answered": 56,
+      "correct": 55,
+      "precision_at_1": 0.9821,
+      "recall": 0.7534,
+      "f1": 0.8527
+    },
+    "0.95": {
+      "answered": 22,
+      "correct": 21,
+      "precision_at_1": 0.9545,
+      "recall": 0.2877,
+      "f1": 0.4421
+    }
+  },
+  "threshold_sweep": {
+    "0.5": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.525": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.55": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.575": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.6": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.625": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.65": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.675": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.7": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.725": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.75": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.775": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.8": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.825": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.85": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.875": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.9": {
+      "answered": 72,
+      "correct": 70,
+      "precision_at_1": 0.9722,
+      "recall": 0.9589,
+      "f1": 0.9655
+    },
+    "0.925": {
+      "answered": 56,
+      "correct": 55,
+      "precision_at_1": 0.9821,
+      "recall": 0.7534,
+      "f1": 0.8527
+    },
+    "0.95": {
+      "answered": 22,
+      "correct": 21,
+      "precision_at_1": 0.9545,
+      "recall": 0.2877,
+      "f1": 0.4421
+    }
+  },
+  "rerank_threshold_sweep": {
+    "0.3": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.35": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.4": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.45": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.5": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.55": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.6": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.65": {
+      "answered": 73,
+      "correct": 71,
+      "precision_at_1": 0.9726,
+      "recall": 0.9726,
+      "f1": 0.9726
+    },
+    "0.7": {
+      "answered": 70,
+      "correct": 69,
+      "precision_at_1": 0.9857,
+      "recall": 0.9452,
+      "f1": 0.965
+    },
+    "0.75": {
+      "answered": 70,
+      "correct": 69,
+      "precision_at_1": 0.9857,
+      "recall": 0.9452,
+      "f1": 0.965
+    },
+    "0.8": {
+      "answered": 69,
+      "correct": 68,
+      "precision_at_1": 0.9855,
+      "recall": 0.9315,
+      "f1": 0.9577
+    },
+    "0.85": {
+      "answered": 64,
+      "correct": 64,
+      "precision_at_1": 1.0,
+      "recall": 0.8767,
+      "f1": 0.9343
+    },
+    "0.9": {
+      "answered": 52,
+      "correct": 52,
+      "precision_at_1": 1.0,
+      "recall": 0.7123,
+      "f1": 0.832
+    }
+  },
+  "judge_model": "claude-sonnet-5-5",
+  "judge_calls": 121
+}

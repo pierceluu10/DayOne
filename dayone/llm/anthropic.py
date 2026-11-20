@@ -23,6 +23,9 @@ class AnthropicLLM:
         self._client = anthropic.Anthropic(
             api_key=settings.anthropic_api_key, timeout=settings.llm_timeout_s, max_retries=0
         )
+        self.calls = 0  # answered requests and their billed tokens, read by the benchmarks
+        self.input_tokens = 0
+        self.output_tokens = 0
 
     def complete(self, system: str, prompt: str, max_tokens: int) -> str:
         for attempt in range(1, TIMEOUT_ATTEMPTS + 1):
@@ -39,5 +42,8 @@ class AnthropicLLM:
                 continue
             except anthropic.APIError as error:
                 raise LLMError(f"{self._model} request failed: {error}") from error
+            self.calls += 1
+            self.input_tokens += message.usage.input_tokens
+            self.output_tokens += message.usage.output_tokens
             return "".join(block.text for block in message.content if block.type == "text")
         raise AssertionError("unreachable")

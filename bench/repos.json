@@ -1,0 +1,256 @@
+[
+  {
+    "name": "click",
+    "url": "https://github.com/pallets/click.git",
+    "ref": "cf19179e8e2fd54c601378cec9e0d21bb12b6fb1",
+    "stack": "python",
+    "category": "cli library (baseline)",
+    "setup": [
+      "python3 -m venv .venv",
+      ".venv/bin/pip install -e . --group tests"
+    ],
+    "ready": ".venv/bin/python -c \"import click, pytest\"",
+    "test": ".venv/bin/python -m pytest tests -m 'not stress' -q",
+    "why_painful": "Barely painful: needs Python >= 3.10 and pip >= 25.1 for --group; the easy baseline.",
+    "module": "click"
+  },
+  {
+    "name": "django-rest-framework",
+    "url": "https://github.com/encode/django-rest-framework.git",
+    "ref": "1af5b55758ac514c492ed3a5fc1a6fb244cdb257",
+    "stack": "python",
+    "category": "web framework",
+    "setup": [
+      "python3 -m venv .venv",
+      ".venv/bin/pip install -e . --group test"
+    ],
+    "ready": ".venv/bin/python -c \"import rest_framework, django, pytest_django\"",
+    "test": ".venv/bin/python -m pytest tests -q",
+    "why_painful": "Requires Django >= 5.2 (Python >= 3.10) and PEP 735 dependency groups, which the distro pip cannot install.",
+    "module": "rest_framework"
+  },
+  {
+    "name": "pillow",
+    "url": "https://github.com/python-pillow/Pillow.git",
+    "ref": "293218ad059d994baf1777d882911bed6a49704a",
+    "stack": "python",
+    "category": "native extension",
+    "setup": [
+      "python3 -m venv .venv",
+      ".venv/bin/pip install -e .[tests]"
+    ],
+    "ready": ".venv/bin/python -c \"import PIL._imaging; from PIL import features; assert features.check('jpg') and features.check('zlib')\"",
+    "test": ".venv/bin/python -c \"from PIL import features; assert features.check('jpg') and features.check('zlib')\" && .venv/bin/python -m pytest Tests/test_image.py Tests/test_file_jpeg.py Tests/test_file_png.py Tests/test_image_resize.py -q",
+    "why_painful": "Builds a C extension from source that needs gcc plus libjpeg and zlib headers, and requires Python >= 3.11 (Ubuntu 22.04 ships 3.10).",
+    "module": "PIL"
+  },
+  {
+    "name": "tiktoken",
+    "url": "https://github.com/openai/tiktoken.git",
+    "ref": "4e71bbe0c078468e00fefbf94b39849389f346e5",
+    "stack": "python",
+    "category": "rust extension",
+    "setup": [
+      "python3 -m venv .venv",
+      ".venv/bin/pip install -e .",
+      ".venv/bin/pip install pytest hypothesis"
+    ],
+    "ready": ".venv/bin/python -c \"import tiktoken._tiktoken, pytest, hypothesis\"",
+    "test": ".venv/bin/python -m pytest tests --import-mode=append -q",
+    "why_painful": "Editable install compiles a Rust extension via setuptools-rust, so it needs rustup/cargo plus a C linker; tests download BPE files at runtime.",
+    "module": "tiktoken"
+  },
+  {
+    "name": "safetensors",
+    "url": "https://github.com/huggingface/safetensors.git",
+    "ref": "a406ca3e7a90598be0cd05a50069cb9bf5ef6ba6",
+    "stack": "python",
+    "category": "rust extension",
+    "setup": [
+      "python3 -m venv .venv",
+      "cd bindings/python && ../../.venv/bin/pip install -e .[testing]"
+    ],
+    "ready": ".venv/bin/python -c \"import safetensors._safetensors_rust, numpy, pytest\"",
+    "test": "cd bindings/python && ../../.venv/bin/python -m pytest tests/test_handle.py tests/test_threadable.py -k 'not s3' -v",
+    "why_painful": "Python package lives in a subdirectory and builds through maturin, which needs a recent Rust toolchain; the testing extra also pulls h5py.",
+    "module": "safetensors"
+  },
+  {
+    "name": "imbalanced-learn",
+    "url": "https://github.com/scikit-learn-contrib/imbalanced-learn.git",
+    "ref": "8504e95f0160f61d1b617ca66f779646d2ee609e",
+    "stack": "python",
+    "category": "ML",
+    "setup": [
+      "python3 -m venv .venv",
+      ".venv/bin/pip install -e .[tests]"
+    ],
+    "ready": ".venv/bin/python -c \"import imblearn, sklearn, scipy, numpy, pytest\"",
+    "test": ".venv/bin/python -m pytest imblearn/over_sampling imblearn/metrics -q",
+    "why_painful": "Pulls numpy, scipy and scikit-learn, which have no wheels on musl (alpine) and need lots of RAM to build from source.",
+    "module": "imblearn"
+  },
+  {
+    "name": "redis-py",
+    "url": "https://github.com/redis/redis-py.git",
+    "ref": "e013126df18e476fbb8b8215f040f39bd3242683",
+    "stack": "python",
+    "category": "service dependency",
+    "setup": [
+      "python3 -m venv .venv",
+      ".venv/bin/pip install -r dev_requirements.txt",
+      ".venv/bin/pip install -e .",
+      "docker run -d -p 6379:6379 redis"
+    ],
+    "ready": ".venv/bin/python -c \"import redis, pytest; redis.Redis().ping()\"",
+    "test": ".venv/bin/python -m pytest tests/test_lock.py tests/test_pipeline.py tests/test_pubsub.py -q",
+    "why_painful": "Tests need a live redis-server on localhost:6379 (CI tests 7.2 and newer; Ubuntu 22.04 ships 6.0) and the README assumes Docker.",
+    "module": "redis"
+  },
+  {
+    "name": "black",
+    "url": "https://github.com/psf/black.git",
+    "ref": "258e7dbf348bc23cb70b8cdf693481c04634ebcc",
+    "stack": "python",
+    "category": "dev tool",
+    "setup": [
+      "python3 -m venv .venv",
+      ".venv/bin/pip install -e .[d] --group tests"
+    ],
+    "ready": ".venv/bin/python -c \"import black, blackd, pytest, xdist\"",
+    "test": ".venv/bin/python -m pytest tests/test_format.py tests/test_black.py -q",
+    "why_painful": "Version comes from git tags via hatch-vcs, it uses PEP 735 groups, and the [d] extra pulls aiohttp, which can need a C build on musl.",
+    "module": "black"
+  },
+  {
+    "name": "rack",
+    "url": "https://github.com/rack/rack.git",
+    "ref": "5f511d7d3d9d62becddcbd403dde813a67e10c81",
+    "stack": "ruby",
+    "category": "web framework",
+    "setup": [
+      "bundle install"
+    ],
+    "ready": "bundle check",
+    "test": "bundle exec rake test:regular",
+    "why_painful": "Needs Ruby, Bundler and a C toolchain for transitive native gems; the distro Ruby may be too old for current gems."
+  },
+  {
+    "name": "sinatra",
+    "url": "https://github.com/sinatra/sinatra.git",
+    "ref": "ebcaff20b358ad44948dfb23f7419087e592f0ba",
+    "stack": "ruby",
+    "category": "web framework / native gems",
+    "setup": [
+      "bundle install"
+    ],
+    "ready": "bundle check",
+    "test": "bundle exec rake test:core",
+    "why_painful": "The Gemfile compiles nokogiri, eventmachine, yajl-ruby, redcarpet, rdiscount and falcon (io-event), so it needs gcc, g++, libxml2, libxslt and libyaml headers plus pandoc."
+  },
+  {
+    "name": "jekyll",
+    "url": "https://github.com/jekyll/jekyll.git",
+    "ref": "1f319fb273b6cdf876bc6edd38d7477935cdda8c",
+    "stack": "ruby",
+    "category": "static site generator / native gems",
+    "setup": [
+      "bundle install"
+    ],
+    "ready": "bundle check",
+    "test": "TZ=UTC bundle exec ruby -I test test/test_filters.rb && TZ=UTC bundle exec ruby -I test test/test_site.rb",
+    "why_painful": "Native gems (eventmachine via em-websocket, nokogiri, google-protobuf for sass-embedded), a dart-sass binary, and tests that only pass in UTC."
+  },
+  {
+    "name": "campfire",
+    "url": "https://github.com/basecamp/once-campfire.git",
+    "ref": "df2465e0c9a47a7e730df9194ba8d2f6eb44c27f",
+    "stack": "ruby",
+    "category": "rails app",
+    "setup": [
+      "bin/setup"
+    ],
+    "ready": "bundle check && bin/rails runner 'exit 0'",
+    "test": "bin/rails db:test:prepare test",
+    "why_painful": "Pins Ruby 3.4.13 (newer than any distro), takes Rails from git main, needs sqlite3, libvips and ffmpeg, expects Redis, and bin/setup assumes brew, pacman, mise, gum and Docker."
+  },
+  {
+    "name": "gin",
+    "url": "https://github.com/gin-gonic/gin.git",
+    "ref": "73726dc606796a025971fe451f0aa6f1b9b847f6",
+    "stack": "go",
+    "category": "web framework",
+    "setup": [
+      "go mod download"
+    ],
+    "ready": "go build ./...",
+    "test": "go test ./...",
+    "why_painful": "go.mod requires Go 1.25, far newer than distro packages (1.18, 1.19 or 1.22)."
+  },
+  {
+    "name": "go-sqlite3",
+    "url": "https://github.com/mattn/go-sqlite3.git",
+    "ref": "93c7e0a2ec6762a38ab371755d49a2b3f4a12e67",
+    "stack": "go",
+    "category": "cgo native extension",
+    "setup": [
+      "go mod download",
+      "go build ."
+    ],
+    "ready": "CGO_ENABLED=1 go build .",
+    "test": "CGO_ENABLED=1 go test -v .",
+    "why_painful": "cgo compiles the bundled SQLite amalgamation, so it needs gcc and libc headers; with CGO off every test fails."
+  },
+  {
+    "name": "cobra",
+    "url": "https://github.com/spf13/cobra.git",
+    "ref": "88b30ab89da2d0d0abb153818746c5a2d30eccec",
+    "stack": "go",
+    "category": "cli library",
+    "setup": [
+      "go mod download"
+    ],
+    "ready": "go build ./...",
+    "test": "go test ./...",
+    "why_painful": "Pure Go and lenient on version; painful only because the bare image has no Go or git."
+  },
+  {
+    "name": "express",
+    "url": "https://github.com/expressjs/express.git",
+    "ref": "cf6722bf89a86905281d9160b6482e08166b5ef0",
+    "stack": "node",
+    "category": "web framework",
+    "setup": [
+      "npm install"
+    ],
+    "ready": "npm ls --depth=0",
+    "test": "npm test",
+    "why_painful": "Express 5 needs Node >= 18; Ubuntu 22.04 ships Node 12 without npm."
+  },
+  {
+    "name": "node-canvas",
+    "url": "https://github.com/Automattic/node-canvas.git",
+    "ref": "f91598e8c7186dbbce3733878d55aad33af29635",
+    "stack": "node",
+    "category": "native extension",
+    "setup": [
+      "npm install --build-from-source"
+    ],
+    "ready": "node -e \"require('./')\"",
+    "test": "npm test",
+    "why_painful": "node-gyp build against cairo, pango, libjpeg, giflib and librsvg dev packages plus python3, make and g++; needs Node >= 18.12."
+  },
+  {
+    "name": "ripgrep",
+    "url": "https://github.com/BurntSushi/ripgrep.git",
+    "ref": "7525479a9576f1ca4c2d04339d78e47ff5ae9b05",
+    "stack": "rust",
+    "category": "rust build",
+    "setup": [
+      "cargo build"
+    ],
+    "ready": "cargo build",
+    "test": "cargo test",
+    "why_painful": "Edition 2024 with rust-version 1.96, newer than distro rustc, so it needs rustup plus a C linker."
+  }
+]

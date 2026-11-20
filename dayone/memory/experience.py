@@ -50,7 +50,7 @@ NEIGHBOUR_COUNT = 10  # enough to find a same-machine hit ranked below other mac
 SEMANTIC_MIN_SIMILARITY = 0.8  # Atlas cosine score; Phase 0 saw 0.847 for the right fix, 0.73 for the next one
 MAX_REASONING_ATTEMPTS = 3  # fixes actually tried
 MAX_REJECTED_REPLIES = 2  # unparseable replies re-asked on top of those, so a bad reply never costs a try
-MAX_TOKENS = 2048  # replies carry inspect lists; a cut-off reply is rejected and wastes an attempt
+MAX_TOKENS = 8192  # adaptive thinking counts against it, and a cut-off reply is rejected and wastes an attempt
 ERROR_TAIL_CHARS = 4000  # pip/apt failures put the cause at the end
 FEEDBACK_CHARS = 3000  # all fix commands' output fed back to the next attempt, split evenly
 FIX_OUTPUT = "fix_output"  # CheckResult.detail key: [{"command", "exit_code", "output"}] from try_fix
@@ -68,8 +68,13 @@ NON_ABORTING = "|| true"
 FIX_RULES = f"""Commands run as root with `sh -lc` in the new hire's throwaway container, in {REPO_DIR} when it exists.
 Use the machine's own package manager. Non-interactive only (-y, --no-cache), no sudo, one command per string,
 do not chain with && or ;. Commands from earlier attempts already ran; only add what is still needed.
-The project's Python is the venv at {REPO_DIR}/.venv: use .venv/bin/python and .venv/bin/pip for anything in the
-project, never the system python or pip."""
+Each command runs in a fresh login shell: a toolchain installed outside the system PATH (rustup, nvm, a Go or Ruby
+tarball) must also be put on PATH for later shells, e.g. by linking its binaries into /usr/local/bin.
+Services a step needs (databases, caches) must be started in the background so the command returns.
+For a Python project, its Python is the venv at {REPO_DIR}/.venv: use .venv/bin/python and .venv/bin/pip for
+anything in the project, never the system python or pip.
+Never edit, skip, deselect or delete the project's tests or source to make a check pass, and build the project
+itself from the checkout (e.g. an editable install), never a released copy from a package index."""
 STRICT_JSON = "Reply with strict JSON and nothing else: "
 
 REASON_SYSTEM = f"""You fix failed setup steps on a new hire's development machine.
@@ -215,8 +220,20 @@ def command_feedback(check: CheckResult) -> str:
 
 class ExperienceMemory:
     def __init__(
-        self, db: Database, llm: LLM, embedder: Embedder, events: EventBus, gitea: Gitea, settings: Settings
+        self,
+        db: Database,
+        llm: LLM,
+        embedder: Embedder,
+        events: EventBus,
+        gitea: Gitea,
+        settings: Settings,
+        recall: bool = True,
+        max_attempts: int = MAX_REASONING_ATTEMPTS,
     ) -> None:
+        """`recall=False` never reads memory (no exact, semantic or hint lookups) but still saves what it learns:
+        the benchmarks' memory-off baseline."""
+        self._recall = recall
+        self._max_attempts = max_attempts
         self._experiences = db[EXPERIENCES]
         self._llm = llm
         self._embedder = embedder
@@ -262,6 +279,8 @@ class ExperienceMemory:
 
     def resolve(self, failure: Failure, try_fix: Callable[[FixProposal], CheckResult]) -> Resolution:
         progress = _Progress(initial=CheckResult(ok=False, evidence="step check failed", error_text=failure.error_text))
+        if not self._recall:
+            return self._reason(failure, try_fix, [], progress)
 
         exact = self._exact(failure)
         if exact:
@@ -386,7 +405,7 @@ class ExperienceMemory:
         chain: list[str] = []
         error = failure.error_text
         tried = rejected = 0
-        while tried < MAX_REASONING_ATTEMPTS:
+        while tried < self._max_attempts:
             prompt = (
                 f"Machine: {failure.facts.summary()}\nStep {failure.step_id} fails with:\n{_tail(error)}\n\n"
                 + (f"Past verified fixes for similar errors (hints, may not apply):\n{hint_text}\n\n" if hints else "")
